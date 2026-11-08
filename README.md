@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PrimeCareAds website
 
-## Getting Started
+Bilingual (Turkish / English) marketing site for PrimeCareAds, an AI-assisted advertising agency in Kadıköy, Istanbul.
 
-First, run the development server:
+Built with Next.js 15 (App Router, static export), Tailwind CSS v4, motion and lucide-react.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static site in ./out
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| UI text (TR / EN) | `src/i18n/tr.ts`, `src/i18n/en.ts` |
+| Blog posts | `src/content/posts.ts` |
+| Service and sector pages | `src/content/services.ts`, `src/content/sectors.ts` |
+| Check-up questions | `src/content/checkup.ts` |
+| KVKK notice and cookie policy | `src/content/legal.ts` |
+| Company details, feature switches | `src/config.ts` |
+| Page composition | `src/views/index.tsx` |
+| Routes | `src/app/(tr)` and `src/app/(en)/en` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Product context and brand rules are in `PRODUCT.md`.
 
-## Learn More
+## Settings to fill before launch
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local` (and add the same keys in Vercel):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_WEB3FORMS_KEY`: delivers the meeting form and newsletter. Without it the form opens the visitor's mail app and the newsletter is hidden.
+- `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_GOOGLE_ADS_ID`, `NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL`, `NEXT_PUBLIC_META_PIXEL_ID`: tracking. Nothing loads, and no cookie banner shows, until at least one is set; tracking then starts only after the visitor accepts cookies.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+In `src/config.ts`, fill in the company's legal name, MERSIS number and KVKK inbox, and set `legalApproved: true` once the KVKK and cookie texts have been legally reviewed.
